@@ -30,7 +30,7 @@
 	<website>https://github.com/hbiyik/script.service.planetdp</website>
     <email>huseyinbiyik@hotmail.com</email>
   </extension>
-</addon><addon id="service.subtitles.turkcealtyazi" name="Turkcealtyazi.org" provider-name="hbiyik" version="0.0.1">
+</addon><addon id="service.subtitles.turkcealtyazi" name="Turkcealtyazi.org" provider-name="hbiyik" version="0.0.2">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.sublib" version="0.0.1"/>

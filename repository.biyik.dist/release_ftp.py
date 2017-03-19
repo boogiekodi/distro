@@ -165,6 +165,7 @@ def gitcli():
 			new_version=[str(x) for x in new_version]
 			new_version = ".".join(new_version)
 			versions[pack]=new_version
+			vers = new_version
 			print "%s: Found new version %s since %s"%(pack,new_version,last_version)
 			print "Do you want to continue with the release? (y/n)"
 			ans=raw_input()
@@ -177,11 +178,7 @@ def gitcli():
 			changelog.truncate()
 			changelog.write(log)
 			changelog.close()
-			###update to new version on addon.xml
-			addon[0].attributes["version"].value=new_version
-			with codecs.open("addon.xml", "w", "utf-8") as out:
-				addonxml.writexml(out, encoding="utf-8")
-			print "%s: New version bumped in addon.xml & changelog"%pack
+			print "Changelog updated in addon"
 			###create version release revision on git and tag it
 			c,o,e=runcmd("git add -A .",repo_path)
 			c,o,e=runcmd("git commit -m '%s Version Release'"%new_version,repo_path)
@@ -189,7 +186,6 @@ def gitcli():
 			c,o,e=runcmd("git push https://%s:%s@github.com/%s/%s.git HEAD:%s "%(username,password,username,pack,branch),repo_path)
 			c,o,e=runcmd("git push https://%s:%s@github.com/%s/%s.git HEAD:%s --tags  "%(username,password,username,pack,branch),repo_path)
 			print "%s: Created new tag on github"%pack
-			vers = new_version
 			#transfer new zipball
 			#ftp_connect()
 			#ftp_chdir(ftp_prefix+distrepo["repo"])
@@ -201,13 +197,17 @@ def gitcli():
 		else:
 			print "%s: No new commits version:%s. Skipping"%(pack,last_version)
 			vers = last_version
+		###update to new version on addon.xml
+		addon[0].attributes["version"].value=vers
+		with codecs.open(os.path.join(repo_path, "addon.xml"), "w", "utf-8") as out:
+			addonxml.writexml(out, encoding="utf-8")
+		print "%s: version bumped in addon.xml"%pack
 
 		###pack new zipball and update binaries
 		pack_path=os.path.join(dirname,pack)
 		if os.path.exists(pack_path):
 			shutil.rmtree(pack_path,onerror=remove_readonly)
 		os.makedirs(pack_path)
-		#urllib.urlretrieve("https://github.com/%s/%s/archive/%s.zip"%(username,pack,new_version),os.path.join(pack_path,"%s-%s.zip"%(pack,new_version)))
 		shutil.rmtree(os.path.join(repo_path,".git"),onerror=remove_readonly)
 		shutil.make_archive(os.path.join(pack_path,"%s-%s"%(pack,vers)), 'zip', stage_path,pack)
 		fixzip(os.path.join(pack_path,"%s-%s"%(pack,vers)) + ".zip")
@@ -228,6 +228,8 @@ def gitcli():
 		addons.appendChild(addon[0])
 		with codecs.open("addons.xml", "w", "utf-8") as out:
 			addonsxml.writexml(out,encoding="UTF-8")
+		
+		##update addons.xml.md5
 		m = md5.new(open(os.path.join(dirname,"addons.xml")).read()).hexdigest()
 		open(os.path.join(dirname,"addons.xml.md5"),"wb").write(m)
 		print "%s: addons.xml and md5 is updated"%pack
