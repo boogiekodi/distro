@@ -1,3 +1,5 @@
+2017-03-20: Merge branch 'master' into release
+2017-03-20: fix commit problem on html_decode function
 2017-03-19: code clean up
 2017-03-19: revert
 2017-03-19: htmlparser causes exception on narrow python builds, replace with a minimal html escaper
