@@ -44,6 +44,7 @@ password=sys.argv[1]
 ftp_prefix="/"
 
 packs=(
+	   ("script.module.htmlement", "master"),
 	   ("script.module.sublib", "release"),
 	   ("service.subtitles.planetdp", "release"),
 	   ("service.subtitles.turkcealtyazi", "release"),

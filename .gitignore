@@ -1,0 +1,8 @@
+*.pyo
+*.pyc
+*.bak
+.project
+.pydevproject
+.settings/
+/repository.biyik.dist/staging/
+/repository.biyik.dist/addon.xml

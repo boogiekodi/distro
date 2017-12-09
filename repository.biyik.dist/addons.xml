@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><addons>
-<addon id="script.module.sublib" name="Sublib Module" provider-name="hbiyik" version="0.0.3">
+<addon id="script.module.htmlement" name="HTMLement Module" provider-name="hbiyik" version="0.0.1">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+	</requires>
+	<extension library="lib" point="xbmc.python.module"/>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">HTMLement module</summary>
+		<description lang="en">HTMLement</description>
+		<license>GNU General Public License, v2</license>
+		<forum>https://github.com/hbiyik/script.module.htmlement/issues</forum>
+		<website>https://github.com/hbiyik/script.module.htmlement</website>
+		<email>huseyinbiyik@hotmail.com</email>
+	</extension>
+</addon><addon id="script.module.sublib" name="Sublib Module" provider-name="hbiyik" version="0.0.4">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -17,7 +31,7 @@
 </addon><addon id="service.subtitles.planetdp" name="Planetdp.org" provider-name="hbiyik" version="0.0.1">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.sublib" version="0.0.3"/>
+    <import addon="script.module.sublib" version="0.0.4"/>
   </requires>
   <extension library="addon.py" point="xbmc.subtitle.module"/>
   <extension point="xbmc.addon.metadata">
@@ -30,10 +44,11 @@
 	<website>https://github.com/hbiyik/script.service.planetdp</website>
     <email>huseyinbiyik@hotmail.com</email>
   </extension>
-</addon><addon id="service.subtitles.turkcealtyazi" name="Turkcealtyazi.org" provider-name="hbiyik" version="0.0.2">
+</addon><addon id="service.subtitles.turkcealtyazi" name="Turkcealtyazi.org" provider-name="hbiyik" version="0.0.4">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.sublib" version="0.0.3"/>
+    <import addon="script.module.sublib" version="0.0.4"/>
+    <import addon="script.module.htmlement" version="0.0.1"/>
   </requires>
   <extension library="addon.py" point="xbmc.subtitle.module"/>
   <extension point="xbmc.addon.metadata">
@@ -49,7 +64,7 @@
 </addon><addon id="service.subtitles.subscene" name="Subscene.com" provider-name="hbiyik" version="2.0.1">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.sublib" version="0.0.3"/>
+    <import addon="script.module.sublib" version="0.0.4"/>
   </requires>
   <extension library="addon.py" point="xbmc.subtitle.module"/>
   <extension point="xbmc.addon.metadata">
